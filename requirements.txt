@@ -1,0 +1,6 @@
+'''
+pip install -r requirements.txt
+'''
+moviepy>=1.0.3
+Pillow>=8.0.0 
+

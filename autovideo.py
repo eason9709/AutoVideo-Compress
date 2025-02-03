@@ -7,6 +7,10 @@ import sys
 import tempfile
 from moviepy.config import change_settings
 
+'''
+記得先在cmd或powershell打上 pip install -r requirements.txt
+'''
+
 def get_ffmpeg_path():
     """
     使用 pip 安裝的 imageio-ffmpeg 取得 ffmpeg 執行檔的路徑

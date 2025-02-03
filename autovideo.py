@@ -9,30 +9,15 @@ from moviepy.config import change_settings
 
 def get_ffmpeg_path():
     """
-    使用相對路徑取得 ffmpeg 執行檔。
-    預設結構：
-      vid/
-        imageio_ffmpeg/
-          binaries/
-            ffmpeg-win-x86_64-v7.1.exe
-        autovideo.py
-    若該路徑不存在，再嘗試在同一目錄尋找 ffmpeg.exe。
+    使用 pip 安裝的 imageio-ffmpeg 取得 ffmpeg 執行檔的路徑
     """
     try:
-        base_path = os.path.dirname(os.path.abspath(__file__))
-        ffmpeg_path = os.path.join(base_path, "imageio_ffmpeg", "binaries", "ffmpeg-win-x86_64-v7.1.exe")
-        print(f"使用相對路徑設定 FFMPEG 路徑: {ffmpeg_path}")
-
-        if not os.path.exists(ffmpeg_path):
-            print(f"{ffmpeg_path} 不存在, 嘗試在同一目錄尋找 ffmpeg.exe")
-            ffmpeg_path = os.path.join(base_path, "ffmpeg.exe")
-            if not os.path.exists(ffmpeg_path):
-                print("找不到 ffmpeg！")
-                return None
-        print(f"最終使用的 FFMPEG 路徑: {ffmpeg_path}")
-        return ffmpeg_path
+        import imageio_ffmpeg
+        ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+        print(f"使用 pip 安裝的 ffmpeg 路徑: {ffmpeg_exe}")
+        return ffmpeg_exe
     except Exception as e:
-        print(f"獲取 FFMPEG 路徑錯誤: {str(e)}")
+        print(f"取得 pip 安裝的 ffmpeg 路徑失敗: {str(e)}")
         return None
 
 # 在程式啟動時設置 ffmpeg 路徑
